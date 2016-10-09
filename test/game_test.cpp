@@ -9,6 +9,21 @@ struct GameTest : testing::Test {
         game = new Game();
     }
 
+    void addTwoNeighbours(){
+        game->addLife(Life(1, 0));
+        game->addLife(Life(-1, 0));
+    }
+
+    void addThreeNeighbours(){
+        addTwoNeighbours();
+        game->addLife(Life(-1, 1));
+    }
+
+    void addFourNeighbours(){
+        addThreeNeighbours();
+        game->addLife(Life(1, 1));
+    }
+
     ~GameTest() {
         delete game;
     }
@@ -31,8 +46,7 @@ TEST_F(GameTest, should_alone_life_die_after_tick) {
 
 TEST_F(GameTest, should_life_not_die_after_tick_when_it_has_two_neighbours) {
     game->addLife(Life(0, 0));
-    game->addLife(Life(1, 0));
-    game->addLife(Life(-1, 0));
+    addTwoNeighbours();
 
     game->tick();
 
@@ -41,11 +55,18 @@ TEST_F(GameTest, should_life_not_die_after_tick_when_it_has_two_neighbours) {
 
 TEST_F(GameTest, should_life_not_die_after_tick_when_it_has_three_neighbours) {
     game->addLife(Life(0, 0));
-    game->addLife(Life(1, 0));
-    game->addLife(Life(-1, 0));
-    game->addLife(Life(-1, 1));
+    addThreeNeighbours();
 
     game->tick();
 
     ASSERT_TRUE(game->isAlive(Life(0, 0)));
+}
+
+TEST_F(GameTest, should_life_die_after_tick_when_it_has_more_then_three_neighbours) {
+    game->addLife(Life(0, 0));
+    addFourNeighbours();
+
+    game->tick();
+
+    ASSERT_FALSE(game->isAlive(Life(0, 0)));
 }
