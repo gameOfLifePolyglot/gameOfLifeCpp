@@ -1,6 +1,6 @@
 #include "life.h"
 #include "gtest/gtest.h"
-#include "test_utils.h"
+#include "collection_utils.h"
 
 TEST(life_test, should_life_allows_to_store_itself_into_set) {
     std::set<Life> lives;

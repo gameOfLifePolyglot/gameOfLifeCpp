@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
-#include "test_utils.h"
+#include "collection_utils.h"
 
-TEST(test_utils_test, set_should_contian_element) {
+TEST(collection_utils_test, set_should_contian_element) {
     std::set<int> set;
 
     set.insert(1);
@@ -9,7 +9,7 @@ TEST(test_utils_test, set_should_contian_element) {
     ASSERT_TRUE(contains(set, 1));
 }
 
-TEST(test_utils_test, set_should_not_contian_element) {
+TEST(collection_utils_test, set_should_not_contian_element) {
     std::set<int> set;
 
     set.insert(2);
@@ -17,7 +17,7 @@ TEST(test_utils_test, set_should_not_contian_element) {
     ASSERT_FALSE(contains(set, 1));
 }
 
-TEST(test_utils_test, set_should_constain_all_elements) {
+TEST(collection_utils_test, set_should_constain_all_elements) {
     std::set<int> set;
 
     set.insert(2);
@@ -30,7 +30,7 @@ TEST(test_utils_test, set_should_constain_all_elements) {
     ASSERT_TRUE(containsAll(set, otherSet));
 }
 
-TEST(test_utils_test, set_should_not_constain_all_elements) {
+TEST(collection_utils_test, set_should_not_constain_all_elements) {
     std::set<int> set;
 
     set.insert(3);
