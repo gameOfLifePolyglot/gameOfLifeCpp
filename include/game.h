@@ -8,7 +8,7 @@ class Game {
 public:
     void addLife(Life life);
 
-    bool isAlive(Life life);
+    bool isAlive(Life life) const;
 
 private:
     std::set<Life> lives;

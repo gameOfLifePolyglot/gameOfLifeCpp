@@ -1,7 +1,7 @@
 #include "game.h"
 #include "collection_utils.h"
 
-bool Game::isAlive(Life life) {
+bool Game::isAlive(Life life) const {
     return contains(lives, life);
 }
 
