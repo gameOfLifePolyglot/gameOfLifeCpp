@@ -1,17 +1,11 @@
 #include "life.h"
 #include "gtest/gtest.h"
 
-TEST(life_test, should_create_life) {
-    Life *life = new Life(0, 0);
-    delete life;
+TEST(life_test, should_implement_less_operator) {
+    ASSERT_TRUE(Life(0,0) < Life(0,1));
 }
 
-TEST(life_test, should_life_has_x_and_y) {
-    Life *life = new Life(1, 2);
-    delete life;
-}
-
-TEST(life_test, should_put_life_into_set) {
+TEST(life_test, should_life_allows_to_store_itself_into_set) {
     std::set<Life> lives;
     ASSERT_TRUE(lives.empty());
 
@@ -20,7 +14,7 @@ TEST(life_test, should_put_life_into_set) {
     ASSERT_FALSE(lives.empty());
 }
 
-TEST(life_test, should_put_two_lives) {
+TEST(life_test, set_can_contains_two_different_lives) {
     std::set<Life> lives;
     ASSERT_TRUE(lives.empty());
 
@@ -30,7 +24,7 @@ TEST(life_test, should_put_two_lives) {
     ASSERT_EQ(lives.size(), 2);
 }
 
-TEST(life_test, should_not_put_two_the_same_lives) {
+TEST(life_test, set_shouldnt_contain_two_lives_if_they_are_the_same) {
     std::set<Life> lives;
     ASSERT_TRUE(lives.empty());
 
@@ -38,8 +32,4 @@ TEST(life_test, should_not_put_two_the_same_lives) {
     lives.insert(Life(0, 0));
 
     ASSERT_EQ(lives.size(), 1);
-}
-
-TEST(life_test, equality) {
-    ASSERT_TRUE(Life(0,0) < Life(0,1));
 }
