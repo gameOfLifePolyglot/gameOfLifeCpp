@@ -30,3 +30,10 @@ bool containsAll(const std::set<T> &container, const std::set<T> &values) {
     }
     return true;
 }
+
+template<class T, typename Predicate>
+std::set<T> filter(const std::set<T> &container, Predicate predicate) {
+    std::set<T> results;
+    std::copy_if(container.begin(), container.end(), std::inserter(results, results.end()), predicate);
+    return results;
+}

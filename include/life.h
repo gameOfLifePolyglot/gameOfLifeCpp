@@ -4,6 +4,7 @@
 
 #if !defined(LIFE_H_)
 #define LIFE_H_
+
 #include <cstdlib>
 #include <set>
 
