@@ -31,9 +31,7 @@ std::set<Life> Life::possibleNeighbours() const {
     std::set<Life> results;
     for (int i = x - 1; i < 2; i++) {
         for (int j = y - 1; j < 2; j++) {
-            if (i == x && j == y) {
-                continue;
-            } else {
+            if (i != x || j != y) {
                 results.insert(Life(i, j));
             }
         }
