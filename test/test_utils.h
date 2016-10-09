@@ -22,8 +22,8 @@ bool contains(const std::set<T> &container, const T &value) {
 
 template<class T>
 inline
-bool containsAll(const std::set<T> &container, const std::set<T> &collection) {
-    for (auto const &value: collection) {
+bool containsAll(const std::set<T> &container, const std::set<T> &values) {
+    for (auto const &value: values) {
         if (!contains(container, value)) {
             return false;
         }
