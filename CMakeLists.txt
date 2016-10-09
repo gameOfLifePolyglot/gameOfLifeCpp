@@ -6,8 +6,10 @@ find_package(Threads REQUIRED)
 find_package(Boost 1.60 COMPONENTS REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 
+add_definitions(-std=c++11 -Wc++11-extensions)
+
 if(CMAKE_COMPILER_IS_GNUCXX)
-    add_definitions(-Wall -std=c++11 -Wc++11-extensions -Wno-deprecated -pthread)
+    add_definitions(-Wall -Wno-deprecated -pthread)
 endif()
 
 if(MSVC)
