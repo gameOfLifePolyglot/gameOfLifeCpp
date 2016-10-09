@@ -10,6 +10,7 @@ public:
 
     bool isAlive(Life life) const;
 
+    void tick();
 private:
     std::set<Life> lives;
 };

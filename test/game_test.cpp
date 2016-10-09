@@ -10,3 +10,11 @@ TEST(game_test, should_game_not_be_empty_after_adding_life) {
 }
 
 
+TEST(game_test, should_alone_life_die_after_tick) {
+    Game game;
+    game.addLife(Life(0, 0));
+
+    game.tick();
+
+    ASSERT_FALSE(game.isAlive(Life(0, 0)));
+}
