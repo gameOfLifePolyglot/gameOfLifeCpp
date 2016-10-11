@@ -9,11 +9,7 @@ struct GameTest : testing::Test {
         game = new Game();
     }
 
-    void createLife(){
-        createSingleLife(0, 0);
-    }
-
-    void createSingleLife(int x, int y) {
+    void createLife(int x = 0, int y = 0) {
         game->addLife(Life(x, y));
     }
 
@@ -26,18 +22,18 @@ struct GameTest : testing::Test {
     }
 
     void addTwoNeighbours() {
-        createSingleLife(1, 0);
-        createSingleLife(-1, 0);
+        createLife(1, 0);
+        createLife(-1, 0);
     }
 
     void addThreeNeighbours() {
         addTwoNeighbours();
-        createSingleLife(-1, 1);
+        createLife(-1, 1);
     }
 
     void addFourNeighbours() {
         addThreeNeighbours();
-        createSingleLife(1, 1);
+        createLife(1, 1);
     }
 
     ~GameTest() {
