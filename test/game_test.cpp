@@ -7,6 +7,9 @@ struct GameTest : testing::Test {
 
     GameTest() {
         game = new Game();
+    }
+
+    void createLife(){
         createSingleLife(0, 0);
     }
 
@@ -43,17 +46,22 @@ struct GameTest : testing::Test {
 };
 
 TEST_F(GameTest, should_game_not_be_empty_after_adding_life) {
+    createLife();
+
     assertIsAlive();
 }
 
 
 TEST_F(GameTest, should_alone_life_die_after_tick) {
+    createLife();
+
     game->tick();
 
     assertIsDead();
 }
 
 TEST_F(GameTest, should_life_not_die_after_tick_when_it_has_two_neighbours) {
+    createLife();
     addTwoNeighbours();
 
     game->tick();
@@ -62,6 +70,7 @@ TEST_F(GameTest, should_life_not_die_after_tick_when_it_has_two_neighbours) {
 }
 
 TEST_F(GameTest, should_life_not_die_after_tick_when_it_has_three_neighbours) {
+    createLife();
     addThreeNeighbours();
 
     game->tick();
@@ -70,9 +79,18 @@ TEST_F(GameTest, should_life_not_die_after_tick_when_it_has_three_neighbours) {
 }
 
 TEST_F(GameTest, should_life_die_after_tick_when_it_has_more_then_three_neighbours) {
+    createLife();
     addFourNeighbours();
 
     game->tick();
 
     assertIsDead();
+}
+
+TEST_F(GameTest, should_life_emerge_after_tick_when_it_has_three_neighbours) {
+    addThreeNeighbours();
+
+    game->tick();
+
+    assertIsAlive();
 }

@@ -17,6 +17,8 @@ private:
 
     bool shouldSurvive(Life life) const;
 
+    bool shouldEmerge(Life life) const;
+
     std::set<Life> getRealNeighbours(Life life) const;
 };
 
