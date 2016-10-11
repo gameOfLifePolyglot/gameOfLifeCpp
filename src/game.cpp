@@ -12,13 +12,7 @@ void Game::addLife(Life life) {
 
 void Game::tick() {
     auto survived = filter(lives, [this](Life life) { return this->shouldSurvive(life); });
-    auto emergedUnflatten = map(lives, [](Life life) { return life.possibleNeighbours(); });
-    std::set<Life> possibleToEmerge;
-    for (auto &sub : emergedUnflatten) {
-        for (auto &emergedLife : sub) {
-            possibleToEmerge.insert(emergedLife);
-        }
-    }
+    auto possibleToEmerge = flatten(map(lives, [](Life life) { return life.possibleNeighbours(); }));
     auto emerged = filter(possibleToEmerge, [this](Life life) { return this->shouldEmerge(life); });
     lives.clear();
     lives.insert(survived.begin(), survived.end());

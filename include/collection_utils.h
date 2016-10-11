@@ -48,3 +48,19 @@ std::set<decltype(func(std::declval<typename T::value_type>()))> const {
     std::transform(iterable.begin(), iterable.end(), std::inserter(res, res.end()), std::forward<Func>(func));
     return res;
 }
+
+template <template<typename...> class R=std::set,
+        typename Top,
+        typename Sub = typename Top::value_type>
+R<typename Sub::value_type> flatten(Top const& all)
+{
+    using std::begin;
+    using std::end;
+
+    R<typename Sub::value_type> accum;
+
+    for(auto& sub : all)
+        std::copy(begin(sub), end(sub), std::inserter(accum, end(accum)));
+
+    return accum;
+}
