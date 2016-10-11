@@ -12,8 +12,7 @@ void Game::addLife(Life life) {
 
 void Game::tick() {
     auto survived = filter(lives, [this](Life life) { return this->shouldSurvive(life); });
-    std::set<std::set<Life>> emergedUnflatten;
-    std::transform(lives.begin(), lives.end(), std::inserter(emergedUnflatten, emergedUnflatten.end()), [](Life life) { return life.possibleNeighbours(); });
+    auto emergedUnflatten = map(lives, [](Life life) { return life.possibleNeighbours(); });
     std::set<Life> possibleToEmerge;
     for (auto &sub : emergedUnflatten) {
         for (auto &emergedLife : sub) {
@@ -43,3 +42,10 @@ std::set<Life> Game::getRealNeighbours(Life life) const {
                           std::inserter(intersection, intersection.end()));
     return intersection;
 }
+//
+//template<typename Collection, typename Operation, typename Results>
+//Results map(Collection col, Operation op) {
+//    Results results;
+//    std::transform(col.begin(), col.end(), std::inserter(results, results.end()), op);
+//    return results;
+//}

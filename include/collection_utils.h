@@ -37,3 +37,14 @@ std::set<T> filter(const std::set<T> &container, Predicate predicate) {
     std::copy_if(container.begin(), container.end(), std::inserter(results, results.end()), predicate);
     return results;
 }
+
+template<typename T, typename Func>
+auto map(const T &iterable, Func&& func) ->
+std::set<decltype(func(std::declval<typename T::value_type>()))> const {
+    typedef decltype(func(std::declval<typename T::value_type>())) value_type;
+    typedef std::set<value_type> result_type;
+
+    result_type res;
+    std::transform(iterable.begin(), iterable.end(), std::inserter(res, res.end()), std::forward<Func>(func));
+    return res;
+}
