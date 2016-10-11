@@ -39,7 +39,7 @@ std::set<T> filter(const std::set<T> &container, Predicate predicate) {
 }
 
 template<typename T, typename Func>
-auto map(const T &iterable, Func&& func) ->
+auto map(const T &iterable, Func &&func) ->
 std::set<decltype(func(std::declval<typename T::value_type>()))> const {
     typedef decltype(func(std::declval<typename T::value_type>())) value_type;
     typedef std::set<value_type> result_type;
@@ -49,18 +49,25 @@ std::set<decltype(func(std::declval<typename T::value_type>()))> const {
     return res;
 }
 
-template <template<typename...> class R=std::set,
+template<template<typename...> class R=std::set,
         typename Top,
         typename Sub = typename Top::value_type>
-R<typename Sub::value_type> flatten(Top const& all)
-{
+R<typename Sub::value_type> flatten(Top const &all) {
     using std::begin;
     using std::end;
 
     R<typename Sub::value_type> accum;
 
-    for(auto& sub : all)
+    for (auto &sub : all)
         std::copy(begin(sub), end(sub), std::inserter(accum, end(accum)));
 
+    return accum;
+}
+
+template<typename Collection>
+std::set<typename Collection::value_type> merge(Collection &first, Collection &second) {
+    std::set<typename Collection::value_type> accum;
+    std::copy(first.begin(), first.end(), std::inserter(accum, end(accum)));
+    std::copy(second.begin(), second.end(), std::inserter(accum, end(accum)));
     return accum;
 }
