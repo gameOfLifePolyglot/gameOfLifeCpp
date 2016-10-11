@@ -1,4 +1,3 @@
-#include <vector>
 #include "game.h"
 #include "collection_utils.h"
 
